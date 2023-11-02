@@ -1,0 +1,21 @@
+FROM alpine:latest as download
+
+WORKDIR /pocketbase
+
+ARG POCKETBASE_VERSION
+
+RUN apk add --no-cache unzip ca-certificates
+
+ADD https://github.com/pocketbase/pocketbase/releases/download/v${POCKETBASE_VERSION}/pocketbase_${POCKETBASE_VERSION}_linux_amd64.zip /tmp/pocketbase.zip
+
+RUN unzip /tmp/pocketbase.zip -d /pocketbase
+
+FROM gcr.io/distroless/static-debian12
+
+WORKDIR /data
+
+COPY --from=download /pocketbase/pocketbase /bin
+
+EXPOSE 8080
+
+ENTRYPOINT ["pocketbase","serve","--dir","/data","--http","0.0.0.0:8080"]
