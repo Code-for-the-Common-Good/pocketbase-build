@@ -1,5 +1,5 @@
 ## **pocketbase-build**
-
+![Docker Image Version (latest semver)](https://img.shields.io/docker/v/whyisybaactaken/pocketbase) 
 A simple template for building [PocketBase](https://pocketbase.io) docker images and hosting it with docker or Kubernetes. This repo is not affiliated or reviewed by the PocketBase team in any fashion.
 
 ---
