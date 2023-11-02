@@ -16,16 +16,16 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build image 🏭
-        run: docker build -f Dockerfile.distroless -t whyisybaactaken/pocketbase:latest --build-arg POCKETBASE_VERSION=${{env.VERSION_MINOR}} .
+        run: docker build -f Dockerfile.distroless -t whyisybaactaken/pocketbase:latest --build-arg POCKETBASE_VERSION=${{ vars.VERSION_MINOR }} .
       
       - name: Tag image 🏷️ minor version
-        run: docker tag whyisybaactaken/pocketbase:latest whyisybaactaken/pocketbase:${{ env.VERSION_MINOR }}
+        run: docker tag whyisybaactaken/pocketbase:latest whyisybaactaken/pocketbase:${{ vars.VERSION_MINOR }}
       - name: Tag image 🏷️ major version
-        run: docker tag whyisybaactaken/pocketbase:latest whyisybaactaken/pocketbase:${{ env.VERSION_MAJOR }}
+        run: docker tag whyisybaactaken/pocketbase:latest whyisybaactaken/pocketbase:${{ vars.VERSION_MAJOR }}
 
       - name: Push image 🚀 minor version
-        run: docker push whyisybaactaken/pocketbase:${{ env.VERSION_MINOR }}
+        run: docker push whyisybaactaken/pocketbase:${{ vars.VERSION_MINOR }}
       - name: Push image 🚀 major version
-        run: docker push whyisybaactaken/pocketbase:${{ env.VERSION_MAJOR }}
+        run: docker push whyisybaactaken/pocketbase:${{ vars.VERSION_MAJOR }}
       - name: Push image 🚀 latest
         run: docker push whyisybaactaken/pocketbase:latest
